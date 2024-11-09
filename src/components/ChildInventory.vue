@@ -32,27 +32,24 @@
 import { watch } from 'vue';
 
 const inbound = defineModel('inbound', {
+  type: Number,
   default: 0,
-  validator: (value) => value >= 0
+  validator: (value) => value >= 0,
 });
 
 const outbound = defineModel('outbound', {
-  default: 0
+  type: Number,
+  default: 0,
+  validator: (value, { stock }) => value >= 0 && value <= stock, // 0以上かつ在庫以下
 });
 
 const stock = defineModel('stock', {
   default: 100,
-  validator: (value) => value >= 0
+  validator: (value) => value >= 0,
 });
 
-// バリデーションと計算ロジック
-watch([inbound, outbound, stock], ([newInbound, newOutbound, newStock]) => {
-  // 出庫のバリデーション
-  if (newOutbound > newStock) {
-    outbound.value = newStock;
-  }
-
-  // 在庫の計算
-  stock.value = Math.max(0, newStock + newInbound - outbound.value);
-}, { immediate: true });
+// 入庫と出庫が変わるたびに在庫を更新
+watch([inbound, outbound], ([newInbound, newOutbound]) => {
+  stock.value = newInbound - newOutbound;
+});
 </script>
