@@ -13,6 +13,11 @@ export const routes = [
     name: 'アバウト',
     component: () => import('@/components/AboutView.vue'),
   },
+  {
+    path: '/inventory',
+    name: '在庫管理',
+    component: () => import('@/components/ParentInventory.vue'),
+  }
 ];
 
 const router = createRouter({

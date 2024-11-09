@@ -59,6 +59,7 @@ export default [
       'arrow-parens': ['error', 'always'], // アロー関数の引数に必ず括弧をつける（可読性向上）
       'no-console': 'warn', // `console`の使用を警告
       'vue/define-macros-order': 'error', // defineAsyncComponentなどの順序に関するエラーチェック
+      'vue/require-prop-types': 'off', // プロパティの型定義を強制しない
     },
   },
 ];
