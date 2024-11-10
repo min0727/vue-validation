@@ -17,6 +17,11 @@ export const routes = [
     path: '/inventory',
     name: '在庫管理',
     component: () => import('@/components/ParentInventory.vue'),
+  },
+  {
+    path: '/bp',
+    name: 'BP管理',
+    component: () => import('@/components/BloodPressureParent.vue'),
   }
 ];
 
