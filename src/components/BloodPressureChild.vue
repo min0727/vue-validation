@@ -26,8 +26,10 @@ const diastolic = defineModel('diastolic', {
 
 // 血圧上が変わった場合、血圧下が自動的に上を超えないよう調整
 watch(systolic, (newSystolic) => {
-  if (diastolic.value >= newSystolic) {
+  if (diastolic.value >= newSystolic && newSystolic > 1) {
     diastolic.value = newSystolic - 1; // 血圧下が血圧上を超えないように設定
+  } else if (newSystolic <= 1) {
+    diastolic.value = 0; // 血圧上が1以下の場合、血圧下を0に設定
   }
 });
 </script>
